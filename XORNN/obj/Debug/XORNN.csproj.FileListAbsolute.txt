@@ -1,0 +1,7 @@
+D:\Work\Programming\c#\XORNN\XORNN\bin\Debug\XORNN.exe.config
+D:\Work\Programming\c#\XORNN\XORNN\bin\Debug\XORNN.exe
+D:\Work\Programming\c#\XORNN\XORNN\bin\Debug\XORNN.pdb
+D:\Work\Programming\c#\XORNN\XORNN\obj\Debug\XORNN.csprojAssemblyReference.cache
+D:\Work\Programming\c#\XORNN\XORNN\obj\Debug\XORNN.csproj.CoreCompileInputs.cache
+D:\Work\Programming\c#\XORNN\XORNN\obj\Debug\XORNN.exe
+D:\Work\Programming\c#\XORNN\XORNN\obj\Debug\XORNN.pdb
