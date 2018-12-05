@@ -58,6 +58,8 @@ namespace XORNN
 
                     if (Math.Round(expectedResults[i]) == Math.Round(hiddenNeurons[2].Output))
                         didGood = true;
+                    else
+                        didGood = false;
 
                     Console.WriteLine(neuralNetworkInputs[i,0] + " xor " + neuralNetworkInputs[i,1] + " so output is " + hiddenNeurons[2].Output + " which makes it " + trueOrFalse.ToString() + " expected outcome was " + expectedResults[i] + " which made this NN " + (didGood ? "nailed" : "didn't catch"));
                     //now comes the back prop
