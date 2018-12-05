@@ -15,7 +15,7 @@ namespace XORNN
 
         private static bool CheckResult(double expected, double actual)
         {
-            if ((Math.Round(actual) <= 0 && expected >= 1) || (Math.Round(actual) >= 1 && expected >= 0))
+            if ((Math.Round(actual) <= 0 && expected >= 1) || (Math.Round(actual) >= 1 && expected <= 0))
                 return false;
             else
                 return true;

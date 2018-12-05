@@ -21,15 +21,20 @@ namespace XORNN
 
         public void SetRandomWeights()
         {
-            Weight[0] = m_Rand.NextDouble();
-            Weight[1] = m_Rand.NextDouble();
+            for (int i = 0; i < Weight.Length; i++)
+            {
+                Weight[i] = m_Rand.NextDouble();
+            }
+           
             m_Bias += Error;
         }
 
         public void AdjustTheWeights()
         {
-            Weight[0] += Error * Inputs[0];
-            Weight[1] += Error * Inputs[1];
+            for (int i = 0; i < Weight.Length; i++)
+            {
+                Weight[i] = Error * Inputs[i];
+            }
             m_Bias += Error;
         }
     }
