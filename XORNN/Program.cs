@@ -10,21 +10,24 @@ namespace XORNN
     {
         static void Main(string[] args)
         {
-            Train();
+            Train(20000);
         }
 
         private static bool CheckResult(double expected, double actual)
         {
             if ((Math.Round(actual) <= 0 && expected >= 1) || (Math.Round(actual) >= 1 && expected <= 0))
                 return false;
-            else
+            else if ((Math.Round(actual) >= 0 && expected >= 1) || (Math.Round(actual) <= 1 && expected <= 0))
                 return true;
+            else
+                return false;
         }
 
-        private static void Train()
+        private static void Train(int iterationAmount)
         {
-            double[,] neuralNetworkInputs = { { 0, 1 }, { 1, 0 }, { 0, 0 }, { 1, 1 }, { 0 , 1 }, { 1 , 1 }, { 0 , 1 }, { 0 , 0 } };
-            double[] expectedResults = { 1, 1, 0, 0, 1, 0, 1, 0 };
+
+            double[,] neuralNetworkInputs = { { 0, 1 }, { 0, 0 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { 1, 1 }, { 0, 1 }, { 0, 0 }, { 0, 1 }, { 1, 0 }, { 0, 0 }, { 1, 1 }, { 0, 1 }, { 1, 1 }, { 0, 1 }, { 0, 0 }, { 1, 0 } };
+            double[] expectedResults = { 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0 };
 
             Neuron[] hiddenNeurons = new Neuron[3]; // 2 neurons and a output neuron
 
@@ -40,10 +43,10 @@ namespace XORNN
 
             int iteration = 0;
 
-            while (iteration < 2000)
+            while (iteration < iterationAmount)
             {
                 iteration++;
-                for (int i = 0; i < 8; i++) //all examples
+                for (int i = 0; i < 17; i++) //all examples
                 {
                     for (int j = 0; j < 2; j++)
                     {
@@ -52,16 +55,17 @@ namespace XORNN
 
                     hiddenNeurons[2].Inputs = new double[] { hiddenNeurons[0].Output, hiddenNeurons[1].Output }; //the output neuron
 
-                    bool trueOrFalse = CheckResult(expectedResults[i],hiddenNeurons[2].Output);
+                    bool trueOrFalse = CheckResult(expectedResults[i], hiddenNeurons[2].Output);
 
                     bool didGood = false;
-
+                        
                     if (Math.Round(expectedResults[i]) == Math.Round(hiddenNeurons[2].Output))
                         didGood = true;
                     else
                         didGood = false;
 
                     Console.WriteLine(neuralNetworkInputs[i,0] + " xor " + neuralNetworkInputs[i,1] + " so output is " + hiddenNeurons[2].Output + " which makes it " + trueOrFalse.ToString() + " expected outcome was " + expectedResults[i] + " which made this NN " + (didGood ? "nailed" : "didn't catch"));
+
                     //now comes the back prop
 
                     hiddenNeurons[2].Error = Sigmoid.SigmoidDerivative(hiddenNeurons[0].Output) * (expectedResults[i] - hiddenNeurons[2].Output);
@@ -78,7 +82,6 @@ namespace XORNN
                     }
                 }
             }
-
             Console.ReadLine();
         }
     }
